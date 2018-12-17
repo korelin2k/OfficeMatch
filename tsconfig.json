@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "target": "es2016",
+        "lib": [
+            "es6"
+        ],
+        "outDir": "./build"
+    },
+    "files": [
+        "src/index.ts"
+    ]
+}
