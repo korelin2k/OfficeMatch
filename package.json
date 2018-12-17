@@ -2,13 +2,13 @@
   "name": "officematch",
   "version": "1.0.0",
   "description": "Office Show - Love Match",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "prebuild": "rm -rf build",
     "build": "gulp --gulpfile gulpfile.js",
     "pretest": "tslint -c test/tslint.json \"src/*.ts\"",
     "test": "mocha --require ts-node/register test/**/*.ts",
-    "start": "npm install -y && npm run test && npm run build && node build/index.js"
+    "start": "npm install -y && npm run test && npm run build && node build/app.js"
   },
   "repository": {
     "type": "git",
