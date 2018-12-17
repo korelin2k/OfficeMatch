@@ -4,11 +4,14 @@
   "description": "Office Show - Love Match",
   "main": "app.js",
   "scripts": {
-    "prebuild": "rm -rf build",
-    "build": "gulp --gulpfile gulpfile.js",
-    "pretest": "tslint -c test/tslint.json \"src/*.ts\"",
+    "build-ts": "tsc",
+    "lint": "tslint -c test/tslint.json 'src/*.ts'",
+    "postinstall": "npm run build-ts",
+    "start": "npm run serve",
+    "serve": "node dist/server.js",
     "test": "mocha --require ts-node/register test/**/*.ts",
-    "start": "npm install -y && npm run test && npm run build && node build/app.js"
+    "watch-node": "nodemon build/app.js",
+    "watch-ts": "tsc -w"
   },
   "repository": {
     "type": "git",
