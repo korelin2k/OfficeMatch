@@ -9,9 +9,7 @@
         "lib": [
             "es6"
         ],
-        "outDir": "./build"
-    },
-    "files": [
-        "src/app.ts"
-    ]
+        "outDir": "./build",
+        "rootDir": "src"
+    }
 }
