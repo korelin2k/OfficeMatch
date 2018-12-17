@@ -8,7 +8,7 @@
     "lint": "tslint -c test/tslint.json 'src/*.ts'",
     "postinstall": "npm run build-ts",
     "start": "npm run serve",
-    "serve": "node dist/server.js",
+    "serve": "node build/app.js",
     "test": "mocha --require ts-node/register test/**/*.ts",
     "watch-node": "nodemon build/app.js",
     "watch-ts": "tsc -w"
