@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 // import { MongoClient } from "mongodb";
 import * as mongo from "mongodb";
+import { Profile } from "./profile";
 
 export class Database {
     private mongoURI: string;
@@ -22,7 +23,23 @@ export class Database {
 
     }
 
-    public insert(profile: any) {
+    // public retrieve(profile: Profile) {
+    //     return new Promise<string>((resolve) => {
+    //         mongo.connect(this.mongoURI, { useNewUrlParser: true })
+    //             .then((client) => {
+    //                 const db = client.db(this.dbName);
+    //                 db.collection(this.dbCollection).insertOne(profile).then((val) => {
+    //                     const insertId: string = JSON.stringify(val.insertedId);
+    //                     client.close();
+    //                     resolve(insertId);
+    //                 });
+    //             }).catch((err) => {
+    //                 console.log(err);
+    //             });
+    //     });
+    // }
+
+    public insert(profile: Profile) {
         return new Promise<string>((resolve) => {
             mongo.connect(this.mongoURI, { useNewUrlParser: true })
                 .then((client) => {
@@ -38,20 +55,33 @@ export class Database {
         });
     }
 
-    public update() {
-        console.log("Hi");
+    public update(profile: Profile) {
+        return new Promise<boolean>((resolve) => {
+            mongo.connect(this.mongoURI, { useNewUrlParser: true })
+                .then((client) => {
+                    const db = client.db(this.dbName);
+                    const queryFind: any = {_id: new mongo.ObjectID(profile.id)};
+
+                    db.collection(this.dbCollection).updateOne(queryFind, { $set: profile}).then((val) => {
+                        client.close();
+                        resolve(true);
+                    });
+                }).catch((err) => {
+                    console.log(err);
+                });
+        });
     }
 
     public find() {
         console.log("Hi");
     }
 
-    public delete(id: string) {
+    public delete(profile: Profile) {
         return new Promise<boolean>((resolve) => {
             mongo.connect(this.mongoURI, { useNewUrlParser: true })
                 .then((client) => {
                     const db = client.db(this.dbName);
-                    const queryObject: any = {_id: new mongo.ObjectID(id)};
+                    const queryObject: any = {_id: new mongo.ObjectID(profile.id)};
 
                     db.collection(this.dbCollection).deleteOne(queryObject).then((val) => {
                         client.close();

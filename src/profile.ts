@@ -14,22 +14,22 @@ export class Profile {
         this.scores = newProfile.scores;
     }
 
-    public details() {
-        const profile = {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            photo: this.photo,
-            scores: this.scores,
-        };
-
-        return profile;
-    }
-
     public add() {
         return new Promise<boolean>((resolve) => {
             const db: Database = new Database();
-            db.insert(this.details()).then((val) => {
+            db.insert(this).then((val) => {
                 this.id = val.replace(/["']/g, "");
+                resolve(true);
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
+    }
+
+    public update() {
+        return new Promise<boolean>((resolve) => {
+            const db: Database = new Database();
+            db.update(this).then((val) => {
                 resolve(true);
             }).catch((err) => {
                 console.log(err);
@@ -40,7 +40,7 @@ export class Profile {
     public remove() {
         return new Promise<boolean>((resolve) => {
             const db: Database = new Database();
-            db.delete(this.id).then((val) => {
+            db.delete(this).then((val) => {
                 resolve(val);
             }).catch((err) => {
                 console.log(err);
