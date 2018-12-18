@@ -25,5 +25,19 @@ describe("Profile Functionality", () => {
             expect(testProfile.id).not.empty;
             done();
         });
-    });   
+    });
+    
+    // it("Update Profile in Database", (done) => { 
+    //     testProfile.update().then(value => {
+    //         expect(testProfile.id).not.empty;
+    //         done();
+    //     });
+    // });
+
+    it("Remove Profile from Database", (done) => { 
+        testProfile.remove().then(value => {
+            expect(value).to.be.true;
+            done();
+        });
+    });
 });

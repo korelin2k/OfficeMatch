@@ -26,10 +26,10 @@ export class Profile {
     }
 
     public add() {
-        return new Promise((resolve) => {
+        return new Promise<boolean>((resolve) => {
             const db: Database = new Database();
             db.insert(this.details()).then((val) => {
-                this.id = val;
+                this.id = val.replace(/["']/g, "");
                 resolve(true);
             }).catch((err) => {
                 console.log(err);
@@ -38,6 +38,13 @@ export class Profile {
     }
 
     public remove() {
-        console.log("hey");
+        return new Promise<boolean>((resolve) => {
+            const db: Database = new Database();
+            db.delete(this.id).then((val) => {
+                resolve(val);
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
     }
 }
