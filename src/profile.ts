@@ -1,25 +1,40 @@
-import * as assert from "assert";
-import * as dotenv from "dotenv";
-import * as mongo from "mongodb";
-
-let mongoURI = "";
-// Load in .env file if the application is not production
-// i.e. not deployed to Heroku
-if (process.env.NODE_ENV !== "production") {
-    dotenv.config();
-    mongoURI = process.env.MONGODB_URI;
-} else {
-    mongoURI = process.env.MONGODB_URI;
-}
+import { Database } from "./database";
 
 export class Profile {
+    public firstName: string;
+    public lastName: string;
+    public photo: string;
+    public scores: number[];
+    public id: string;
 
-    constructor() {
-        console.log("heys");
+    constructor(newProfile: any) {
+        this.firstName = newProfile.firstName;
+        this.lastName = newProfile.lastName;
+        this.photo = newProfile.photo;
+        this.scores = newProfile.scores;
+    }
+
+    public details() {
+        const profile = {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            photo: this.photo,
+            scores: this.scores,
+        };
+
+        return profile;
     }
 
     public add() {
-        console.log("hey");
+        return new Promise((resolve) => {
+            const db: Database = new Database();
+            db.insert(this.details()).then((val) => {
+                this.id = val;
+                resolve(true);
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
     }
 
     public remove() {
