@@ -47,4 +47,36 @@ export class Profile {
             });
         });
     }
+
+    public match() {
+        return new Promise<Profile>((resolve) => {
+            const db: Database = new Database();
+            db.findAll().then((val) => {
+                let highMatch: Profile;
+
+                // Initialize to a high value so you can
+                // match to someone right off the bat
+                let highValue: number = 100;
+
+                val.forEach((obj: Profile) => {
+                    const scores = obj.scores;
+                    let value = 0;
+                    let i: number = 0;
+
+                    for (i; i < scores.length; i++) {
+                        value += Math.abs(scores[i] - this.scores[i]);
+                    }
+
+                    if (value < highValue) {
+                        highValue = value;
+                        highMatch = obj;
+                    }
+                });
+
+                resolve(highMatch);
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
+    }
 }

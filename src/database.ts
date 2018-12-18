@@ -23,22 +23,6 @@ export class Database {
 
     }
 
-    // public retrieve(profile: Profile) {
-    //     return new Promise<string>((resolve) => {
-    //         mongo.connect(this.mongoURI, { useNewUrlParser: true })
-    //             .then((client) => {
-    //                 const db = client.db(this.dbName);
-    //                 db.collection(this.dbCollection).insertOne(profile).then((val) => {
-    //                     const insertId: string = JSON.stringify(val.insertedId);
-    //                     client.close();
-    //                     resolve(insertId);
-    //                 });
-    //             }).catch((err) => {
-    //                 console.log(err);
-    //             });
-    //     });
-    // }
-
     public insert(profile: Profile) {
         return new Promise<string>((resolve) => {
             mongo.connect(this.mongoURI, { useNewUrlParser: true })
@@ -72,8 +56,20 @@ export class Database {
         });
     }
 
-    public find() {
-        console.log("Hi");
+    public findAll() {
+        return new Promise<Profile[]>((resolve) => {
+            mongo.connect(this.mongoURI, { useNewUrlParser: true })
+                .then((client) => {
+                    const db = client.db(this.dbName);
+
+                    db.collection(this.dbCollection).find({}).toArray().then((val) => {
+                        client.close();
+                        resolve(val);
+                    });
+                }).catch((err) => {
+                    console.log(err);
+                });
+        });
     }
 
     public delete(profile: Profile) {

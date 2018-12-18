@@ -36,6 +36,14 @@ describe("Profile Functionality", () => {
         });
     });
 
+    it("Match Character", (done) => { 
+        testProfile.match().then(value => {
+            expect(typeof value).to.equal('object');
+            expect(value.firstName).not.empty;
+            done();
+        });
+    });
+
     it("Remove Profile from Database", (done) => { 
         testProfile.remove().then(value => {
             expect(value).to.be.true;
