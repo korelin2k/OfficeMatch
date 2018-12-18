@@ -58,18 +58,25 @@ export class Profile {
                 // match to someone right off the bat
                 let highValue: number = 100;
 
-                val.forEach((obj: Profile) => {
-                    const scores = obj.scores;
-                    let value = 0;
-                    let i: number = 0;
+                // const profID = this.id.replace(/["']/g, "");
+                val.forEach((obj: any) => {
+                    const objID: string = JSON.stringify(obj._id).replace(/["']/g, "");
 
-                    for (i; i < scores.length; i++) {
-                        value += Math.abs(scores[i] - this.scores[i]);
-                    }
+                    // Shouldn't match with yourself
+                    // Lonely life otherwise
+                    if (objID !== this.id) {
+                        const scores = obj.scores;
+                        let value = 0;
+                        let i: number = 0;
 
-                    if (value < highValue) {
-                        highValue = value;
-                        highMatch = obj;
+                        for (i; i < scores.length; i++) {
+                            value += Math.abs(scores[i] - this.scores[i]);
+                        }
+
+                        if (value < highValue) {
+                            highValue = value;
+                            highMatch = obj;
+                        }
                     }
                 });
 

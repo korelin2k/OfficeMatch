@@ -5,7 +5,7 @@ const profileDetails = {
     firstName: "Chris",
     lastName: "Figgins",
     photo: "https://pbs.twimg.com/profile_images/378800000629955505/cbf2ea1c2066cfcfdac32cee4f0b3c85.jpeg",
-    scores: [ 5, 3, 3, 4, 3, 5, 4, 3, 2, 1 ],
+    scores: [ 2, 4, 2, 4, 1, 4, 1, 1, 3, 3 ],
 };
 
 const testProfile: Profile = new Profile(profileDetails);
