@@ -48,6 +48,20 @@ export class Profile {
         });
     }
 
+    // Removed this functionality - doesn't make sense to have to create
+    // a profile to search for one
+    //
+    // public search(first: string, last: string) {
+    //     return new Promise<Profile[]>((resolve) => {
+    //         const db: Database = new Database();
+    //         db.find(first, last).then((val) => {
+    //             resolve(val);
+    //         }).catch((err) => {
+    //             console.log(err);
+    //         });
+    //     });
+    // }
+
     public match() {
         return new Promise<Profile>((resolve) => {
             const db: Database = new Database();

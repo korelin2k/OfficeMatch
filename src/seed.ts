@@ -60,8 +60,8 @@ jason.add();
 
 // Good Janet
 const goodJanetDetails = {
-    firstName: "Janet",
-    lastName: "",
+    firstName: "Good",
+    lastName: "Janet",
     photo: `https://vignette.wikia.nocookie.net/thegoodplace/images/9/\
 90/3janet.jpg/revision/latest/scale-to-width-down/620?cb=20180918204908`,
     scores: [ 5, 5, 1, 5, 1, 5, 2, 1, 1, 1 ],
@@ -71,8 +71,8 @@ goodJanet.add();
 
 // Bad Janet
 const badJanetDetails = {
-    firstName: "Janet",
-    lastName: "",
+    firstName: "Bad",
+    lastName: "Janet",
     photo: `https://vignette.wikia.nocookie.net/thegoodplace/images/d/\
 da/Bad_Janet.jpg/revision/latest/scale-to-width-down/619?cb=20171023030348`,
     scores: [ 1, 1, 1, 1, 1, 5, 3, 5, 5, 1 ],

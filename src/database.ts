@@ -56,6 +56,23 @@ export class Database {
         });
     }
 
+    public find(first: string, last: string) {
+        return new Promise<Profile[]>((resolve) => {
+            mongo.connect(this.mongoURI, { useNewUrlParser: true })
+                .then((client) => {
+                    const db = client.db(this.dbName);
+                    const queryFind: any = {firstName: first, lastName: last};
+
+                    db.collection(this.dbCollection).find(queryFind).toArray().then((val) => {
+                        client.close();
+                        resolve(val);
+                    });
+                }).catch((err) => {
+                    console.log(err);
+                });
+        });
+    }
+
     public findAll() {
         return new Promise<Profile[]>((resolve) => {
             mongo.connect(this.mongoURI, { useNewUrlParser: true })

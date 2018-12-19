@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "8210c26b-db65-4295-95cc-aa4357406021",
+		"name": "MatchGame",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/profile/search/Good/Janet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"profile",
+						"search",
+						"Good",
+						"Janet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Match",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Chris\",\r\n    \"lastName\": \"Figgins\",\r\n    \"photo\": \"https://pbs.twimg.com/profile_images/378800000629955505/cbf2ea1c2066cfcfdac32cee4f0b3c85.jpeg\",\r\n    \"scores\": [ 2, 4, 2, 4, 1, 4, 1, 1, 3, 3 ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/profile/match",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"profile",
+						"match"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Chris\",\r\n    \"lastName\": \"Figgins\",\r\n    \"photo\": \"https://pbs.twimg.com/profile_images/378800000629955505/cbf2ea1c2066cfcfdac32cee4f0b3c85.jpeg\",\r\n    \"scores\": [ 2, 4, 2, 4, 1, 4, 1, 1, 3, 3 ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/profile/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"profile",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

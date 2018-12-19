@@ -26,6 +26,15 @@ describe("Profile Functionality", () => {
             done();
         });
     });
+
+    // Removed this functionality
+    //
+    // it("Find Profile in Database", (done) => { 
+    //     testProfile.search(profileDetails.firstName, profileDetails.lastName).then(value => {
+    //         expect(value[0].firstName).to.equal(profileDetails.firstName);
+    //         done();
+    //     });
+    // });
     
     it("Update Profile in Database", (done) => { 
         testProfile.firstName = "Christopher";
@@ -38,7 +47,7 @@ describe("Profile Functionality", () => {
 
     it("Match Character", (done) => { 
         testProfile.match().then(value => {
-            expect(typeof value).to.equal('object');
+            expect(typeof value).to.equal("object");
             expect(value.firstName).not.empty;
             done();
         });
