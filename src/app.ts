@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as exphbs from "express-handlebars";
-import { search } from "./helper";
+import { search, searchAll } from "./helper";
 import { Profile } from "./profile";
 
 const app = express();
@@ -28,6 +28,21 @@ app.get("/api/profile/search/:id", (req, res) => {
         }
     }).catch(() => {
         res.status(404).send("Profile Not Found");
+    });
+});
+
+// Return profile
+app.get("/api/profile/all", (req, res) => {
+    const id = req.params.id;
+
+    searchAll().then((val) => {
+        if (typeof val === "object") {
+            res.json(val);
+        } else {
+            throw new Error();
+        }
+    }).catch(() => {
+        res.status(404).send("No Profiles");
     });
 });
 

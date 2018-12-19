@@ -15,7 +15,22 @@ export function search(id: string) {
                 resolve(false);
             }
         }).catch((err) => {
-            console.log("testing234234");
+            console.log(err);
+        });
+    });
+}
+
+export function searchAll() {
+
+    return new Promise<boolean | Profile[]>((resolve) => {
+        const db = new Database();
+        db.findAll().then((val) => {
+            if (typeof val === "object") {
+                resolve(val);
+            } else {
+                resolve(false);
+            }
+        }).catch((err) => {
             console.log(err);
         });
     });

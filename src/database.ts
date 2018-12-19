@@ -75,7 +75,7 @@ export class Database {
     }
 
     public findAll() {
-        return new Promise<Profile[]>((resolve) => {
+        return new Promise<boolean | Profile[]>((resolve) => {
             mongo.connect(this.mongoURI, { useNewUrlParser: true })
                 .then((client) => {
                     const db = client.db(this.dbName);
@@ -85,7 +85,7 @@ export class Database {
                         resolve(val);
                     });
                 }).catch((err) => {
-                    console.log(err);
+                    resolve(false);
                 });
         });
     }
