@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as exphbs from "express-handlebars";
-import { Database } from "./database";
+import { search } from "./helper";
 import { Profile } from "./profile";
 
 const app = express();
@@ -17,14 +17,17 @@ app.get("/", (req, res) => {
 });
 
 // Return profile
-app.get("/api/profile/search/:first/:last", (req, res) => {
-    const first = req.params.first;
-    const last = req.params.last;
+app.get("/api/profile/search/:id", (req, res) => {
+    const id = req.params.id;
 
-    const db = new Database();
-
-    db.find(first, last).then((val) => {
-        res.json(val);
+    search(id).then((val) => {
+        if (typeof val === "object") {
+            res.json(val);
+        } else {
+            throw new Error();
+        }
+    }).catch(() => {
+        res.status(404).send("Profile Not Found");
     });
 });
 
@@ -35,18 +38,26 @@ app.post("/api/profile/add", (req, res) => {
     const profile = new Profile(body);
 
     profile.add().then((val) => {
-        res.status(200).end();
+        res.json(val);
     });
 });
 
 // Return match
-app.get("/api/profile/match", (req, res) => {
-    const body: Profile = req.body;
+app.get("/api/profile/match/:id", (req, res) => {
+    const id = req.params.id;
 
-    const profile = new Profile(body);
-
-    profile.match().then((char) => {
-        res.json(char);
+    search(id).then((val) => {
+        if (typeof val === "object") {
+            const profile = new Profile(val);
+            profile.id = id;
+            profile.match().then((char) => {
+                res.json(char);
+            });
+        } else {
+            throw new Error();
+        }
+    }).catch(() => {
+        res.status(404).send("Match Not Found - Well, that sucks");
     });
 });
 

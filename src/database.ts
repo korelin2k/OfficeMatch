@@ -1,5 +1,4 @@
 import * as dotenv from "dotenv";
-// import { MongoClient } from "mongodb";
 import * as mongo from "mongodb";
 import { Profile } from "./profile";
 
@@ -56,19 +55,21 @@ export class Database {
         });
     }
 
-    public find(first: string, last: string) {
-        return new Promise<Profile[]>((resolve) => {
+    public find(id: string) {
+        return new Promise<boolean | Profile[]>((resolve) => {
             mongo.connect(this.mongoURI, { useNewUrlParser: true })
                 .then((client) => {
                     const db = client.db(this.dbName);
-                    const queryFind: any = {firstName: first, lastName: last};
+                    const queryFind: any = {_id: new mongo.ObjectID(id)};
 
                     db.collection(this.dbCollection).find(queryFind).toArray().then((val) => {
                         client.close();
                         resolve(val);
+                    }).catch((err) => {
+                        console.log(err);
                     });
                 }).catch((err) => {
-                    console.log(err);
+                    resolve(false);
                 });
         });
     }

@@ -21,7 +21,7 @@ describe("Profile Functionality", () => {
 
     it("Add Profile to Database", (done) => { 
         testProfile.add().then(value => {
-            expect(value).to.be.true;
+            expect(typeof value).to.equal("object");
             expect(testProfile.id).not.empty;
             done();
         });

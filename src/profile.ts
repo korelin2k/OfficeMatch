@@ -15,11 +15,11 @@ export class Profile {
     }
 
     public add() {
-        return new Promise<boolean>((resolve) => {
+        return new Promise<{}>((resolve) => {
             const db: Database = new Database();
             db.insert(this).then((val) => {
                 this.id = val.replace(/["']/g, "");
-                resolve(true);
+                resolve({ id: this.id });
             }).catch((err) => {
                 console.log(err);
             });
@@ -48,20 +48,6 @@ export class Profile {
         });
     }
 
-    // Removed this functionality - doesn't make sense to have to create
-    // a profile to search for one
-    //
-    // public search(first: string, last: string) {
-    //     return new Promise<Profile[]>((resolve) => {
-    //         const db: Database = new Database();
-    //         db.find(first, last).then((val) => {
-    //             resolve(val);
-    //         }).catch((err) => {
-    //             console.log(err);
-    //         });
-    //     });
-    // }
-
     public match() {
         return new Promise<Profile>((resolve) => {
             const db: Database = new Database();
@@ -72,7 +58,6 @@ export class Profile {
                 // match to someone right off the bat
                 let highValue: number = 100;
 
-                // const profID = this.id.replace(/["']/g, "");
                 val.forEach((obj: any) => {
                     const objID: string = JSON.stringify(obj._id).replace(/["']/g, "");
 
