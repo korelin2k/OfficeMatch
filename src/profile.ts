@@ -15,7 +15,7 @@ export class Profile {
     }
 
     public add() {
-        return new Promise<{}>((resolve) => {
+        return new Promise<any>((resolve) => {
             const db: Database = new Database();
             db.insert(this).then((val) => {
                 this.id = val.replace(/["']/g, "");

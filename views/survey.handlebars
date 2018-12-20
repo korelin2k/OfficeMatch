@@ -1,0 +1,36 @@
+<form action="/api/profile/add" method="post">
+    <h1>About You</h1>
+    <hr />
+    <div>
+        <label for="firstName">First Name (Required)</label>
+        <input name="firstName" id="firstName" class="form-control">
+    </div>
+    <div>
+        <label for="lastName">Last Name (Required)</label>
+        <input name="lastName" id="lastName" class="form-control">
+    </div>
+    <div>
+        <label for="photo">Link to Photo Image (Required)</label>
+        <input name="photo" id="photo" class="form-control">
+    </div>
+    <br />
+    <h1>Questions</h1>
+    <hr />
+    {{#each questions}}
+    {{ this }}
+    <div>
+        <select name="scores" class="form-control form-control-lg">
+            <option selected="true" disabled="disabled">Select an Option</option>  
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+    </div>
+    {{/each}}
+    <br />
+    <div>
+        <button class="btn btn-primary">Find out now!</button>
+    </div>
+</form>
